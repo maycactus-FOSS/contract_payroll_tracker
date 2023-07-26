@@ -1,14 +1,44 @@
 {% extends './base.html' %}
+{% load static %}
 
-{% block title %}Contract List{% endblock %}
+{% block title %}Contract List{% endblock title %}
+
+{% block script %}
+<script src="{% static 'contracts/js/jquery-3.7.0.min.js' %}"></script>
+<script>
+  $(document).ready(function() {
+    $("#contract-table th").click(function() {
+      var table = $(this).parents('table').eq(0);
+      var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
+      this.asc = !this.asc;
+      if (!this.asc) {
+        rows = rows.reverse();
+      }
+      for (var i = 0; i < rows.length; i++) {
+        table.append(rows[i]);
+      }
+    });
+    function comparer(index) {
+      return function(a, b) {
+        var valA = getCellValue(a, index), valB = getCellValue(b, index);
+        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB);
+      };
+    }
+    function getCellValue(row, index) {
+      return $(row).children('td').eq(index).text();
+    }
+  });
+</script>
+{% endblock script %}
 
 {% block content %}
+<div class="list-container">
   <h1>Contract List</h1>
-  <table>
+  <table id="contract-table">
     <tr>
-      <th>Date</th>
-      <th>Place</th>
-      <th>Income</th>
+      <th class="sortable">Date</th>
+      <th class="sortable">Place</th>
+      <th class="sortable">Income</th>
     </tr>
     {% for contract in contracts %}
       <tr>
@@ -18,4 +48,5 @@
       </tr>
     {% endfor %}
   </table>
-{% endblock %}
+</div>
+{% endblock content %}

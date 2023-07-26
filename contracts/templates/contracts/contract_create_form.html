@@ -3,6 +3,7 @@
 {% block title %}Create Contract{% endblock %}
 
 {% block content %}
+<div class="form-container">
   <h1>Create Contract</h1>
   <form method="post">
     {% csrf_token %}
@@ -11,4 +12,5 @@
     </table>
     <input type="submit" value="Save">
   </form>
+</div>
 {% endblock %}

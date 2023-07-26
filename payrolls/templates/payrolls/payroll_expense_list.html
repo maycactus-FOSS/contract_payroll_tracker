@@ -1,0 +1,52 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block title %}Payroll Expense List{% endblock title %}
+
+{% block script %}
+<script src="{% static 'payrolls/js/jquery-3.7.0.min.js' %}"></script>
+<script>
+  $(document).ready(function() {
+    $("#payroll-table th").click(function() {
+        var table = $(this).parents('table').eq(0);
+        var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
+        this.asc = !this.asc;
+        if (!this.asc) {
+          rows = rows.reverse();
+        }
+        for (var i = 0; i < rows.length; i++) {
+          table.append(rows[i]);
+        }
+      });
+  function comparer(index) {
+    return function(a, b) {
+      var valA = getCellValue(a, index), valB = getCellValue(b, index);
+      return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB);
+    };
+  }
+  function getCellValue(row, index) {
+    return $(row).children('td').eq(index).text();
+  }
+  });
+</script>
+{% endblock script %}
+
+{% block content %}
+  <div class="list-container">
+    <h1>Payroll Expense List</h1>
+    <table >
+      <tr>
+        <th class="sortable">Date</th>
+        <th class="sortable">Hours Worked</th>
+        <th class="sortable">Employee Name</th>
+      </tr>
+      {% for expense in expenses %}
+        <tr>
+          <td>{{ expense.date }}</td>
+          <td>{{ expense.hours_worked }}</td>
+          <td>{{ expense.employee.name }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock content %}

@@ -10,9 +10,9 @@ class Employee(models.Model):
     def __str__(self):
         return f"Employee - {self.name}"
 
-    def get_hours_worked(self, operating_expenses):
-        if operating_expenses:
-            hours_worked = sum(expense.hours_worked for expense in operating_expenses)
+    def get_hours_worked(self, payroll_expenses):
+        if payroll_expenses:
+            hours_worked = sum(expense.hours_worked for expense in payroll_expenses)
         else:
             hours_worked = 0
         return hours_worked

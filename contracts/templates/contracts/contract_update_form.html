@@ -3,6 +3,7 @@
 {% block title %}Edit Contract{% endblock %}
 
 {% block content %}
+<div class="form-container">
   <h1>Edit Contract</h1>
   <form method="post">
     {% csrf_token %}
@@ -11,4 +12,5 @@
     </table>
     <input type="submit" value="Update">
   </form>
+</div>
 {% endblock %}

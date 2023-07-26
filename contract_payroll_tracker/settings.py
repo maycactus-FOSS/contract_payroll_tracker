@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'contracts',
     'dashboard',
     'employees',
-    'expenses',
+    'payrolls',
 ]
 
 MIDDLEWARE = [

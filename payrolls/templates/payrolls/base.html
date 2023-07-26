@@ -2,10 +2,13 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/styles.css' %}">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'payrolls/css/styles.css' %}">
+    {% block script %}{% endblock script %}
 </head>
+
 <body>
     {% include './base_header.html' %}
     <div class="container">
@@ -14,4 +17,5 @@
     </div>
     {% include './base_footer.html' %}
 </body>
+
 </html>
