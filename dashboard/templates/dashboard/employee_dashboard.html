@@ -1,0 +1,21 @@
+<!-- dashboard/employee_dashboard.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Dashboard</title>
+</head>
+<body>
+    <h1>Employee Dashboard</h1>
+    <form method="get" action="{% url 'employee_dashboard' employee.employee_id %}">
+        Start Date: <input type="date" name="start_date">
+        End Date: <input type="date" name="end_date">
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Selected Employee: {{ employee.name }}</h2>
+    <h2>Selected Period: {{ start_date }} to {{ end_date }}</h2>
+    <h2>Employee Income: {{ employee_income }}</h2>
+    <h2>Net Income: {{ employee_net_income }}</h2>
+    <h2>Deductions: {{ employee_deductions }}</h2>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!-- dashboard/business_dashboard.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Business Dashboard</title>
+</head>
+<body>
+    <h1>Business Dashboard</h1>
+    <form method="get" action="{% url 'business_dashboard' %}">
+        Start Date: <input type="date" name="start_date">
+        End Date: <input type="date" name="end_date">
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Selected Period: {{ start_date }} to {{ end_date }}</h2>
+    <h2>Revenue: {{ revenue }}</h2>
+    <h2>Total Expenses: {{ total_expenses }}</h2>
+    <h2>Travel Distance: {{ travel_distance }}</h2>
+    <h2>Net Income: {{ net_income }}</h2>
+</body>
+</html>
