@@ -3,17 +3,17 @@ from django.shortcuts import render, get_object_or_404
 from contracts.models import Contract
 from employees.models import Employee
 from expenses.models import OperatingExpense
-from datetime import datetime  # Add this import line
+from functools import lru_cache
+
 
 def default_dashboard(request):
     return render(request, 'dashboard/default_dashboard.html')
 
+
 def business_dashboard(request):
-    # Assuming you have a date range input on the dashboard to select the desired period
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
 
-    # Add logic here to calculate revenue, expenses, and travel distance for the selected period
     contracts = Contract.objects.filter(date__range=(start_date, end_date))
     revenue = sum(contract.income for contract in contracts)
     expenses = OperatingExpense.objects.filter(date__range=(start_date, end_date))
@@ -30,43 +30,101 @@ def business_dashboard(request):
         'net_income': net_income,
     })
 
+
 def employee_dashboard(request, employee_id):
     try:
-        # Convert the employee_id to an integer (assuming it's a numeric value)
         employee_id = int(employee_id)
     except ValueError:
-        # Handle the case when the employee_id is not a valid numeric value
-        # For example, redirect to an error page or display an error message
-        # In this case, we'll raise a 404 page not found error.
         raise Http404("Invalid employee ID")
 
-    # Get the employee instance based on the provided employee_id or return 404 if not found
     employee = get_object_or_404(Employee, employee_id=employee_id)
 
-    # Assuming you have selected a date range for the dashboard
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
 
-
-    # Retrieve the operating expenses for the specific employee and date range
     operating_expenses = OperatingExpense.objects.filter(
         employee=employee,
         date__range=(start_date, end_date)
     )
 
-    # Calculate employee income, net income, and deductions using the Employee model methods
-    employee_income = employee.calculate_income(operating_expenses)
-    employee_net_income = employee.calculate_net_income(operating_expenses)
-    employee_deductions = employee.calculate_deductions(operating_expenses)
+    # Calculate employee income, net income, tax, CPP, and EI deductions using the helper functions
+    income = calculate_employee_income(employee, operating_expenses)
+    federal_tax = calculate_federal_tax(employee, operating_expenses)
+    provincial_tax = calculate_provincial_tax(employee, operating_expenses)
+    cpp = calculate_cpp(employee, operating_expenses)
+    ei = calculate_ei(employee, operating_expenses)
+    net_income = calculate_employee_net_income(employee, operating_expenses)
 
     # Pass the calculated values to the template or do whatever you need to do with them
     context = {
         'employee': employee,
         'start_date': start_date,
         'end_date': end_date,
-        'employee_income': employee_income,
-        'employee_net_income': employee_net_income,
-        'employee_deductions': employee_deductions,
+        'income': income,
+        'federal_tax': federal_tax,
+        'provincial_tax': provincial_tax,
+        'cpp': cpp,
+        'ei': ei,
+        'net_income': net_income,
     }
 
     return render(request, 'dashboard/employee_dashboard.html', context)
+
+# Helper functions to calculate employee income, and net income
+
+
+@lru_cache(maxsize=None)
+def calculate_employee_income(employee, operating_expenses):
+    hours_worked = employee.get_hours_worked(operating_expenses)
+    income = hours_worked * employee.hourly_rate * (1 + employee.vacation_rate)
+    return income
+
+
+@lru_cache(maxsize=None)
+def calculate_federal_tax(employee, operating_expenses):
+    if operating_expenses:
+        total_federal_tax = sum(
+            expense.federal_tax for expense in operating_expenses)
+    else:
+        total_federal_tax = 0
+    return total_federal_tax
+
+
+@lru_cache(maxsize=None)
+def calculate_provincial_tax(employee, operating_expenses):
+    if operating_expenses:
+        total_provincial_tax = sum(
+            expense.provincial_tax for expense in operating_expenses)
+    else:
+        total_provincial_tax = 0
+    return total_provincial_tax
+
+
+@lru_cache(maxsize=None)
+def calculate_cpp(employee, operating_expenses):
+    if operating_expenses:
+        total_cpp = sum(expense.cpp for expense in operating_expenses)
+    else:
+        total_cpp = 0
+    return total_cpp
+
+
+@lru_cache(maxsize=None)
+def calculate_ei(employee, operating_expenses):
+    if operating_expenses:
+        total_ei = sum(expense.ei for expense in operating_expenses)
+    else:
+        total_ei = 0
+    return total_ei
+
+
+@lru_cache(maxsize=None)
+def calculate_employee_net_income(employee, operating_expenses):
+    hours_worked = employee.get_hours_worked(operating_expenses)
+    federal_tax = calculate_federal_tax(employee, operating_expenses)
+    provincial_tax = calculate_provincial_tax(employee, operating_expenses)
+    cpp = calculate_cpp(employee, operating_expenses)
+    ei = calculate_ei(employee, operating_expenses)
+    net_income = hours_worked * employee.hourly_rate * \
+        (1 + employee.vacation_rate) - federal_tax - provincial_tax - cpp - ei
+    return net_income

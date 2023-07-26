@@ -15,24 +15,32 @@
 
     <div class="dashboard-info">
       <div class="dashboard-item">
-        <h2>Selected Employee</h2>
-        <p>{{ employee.name }}</p>
+          <h2>Selected Employee</h2>
+          <p>{{ employee.name }}</p>
       </div>
       <div class="dashboard-item">
-        <h2>Selected Period</h2>
-        <p>{{ start_date }} to {{ end_date }}</p>
+          <h2>Selected Period</h2>
+          <p>{{ start_date }} to {{ end_date }}</p>
       </div>
       <div class="dashboard-item">
-        <h2>Employee Income</h2>
-        <p>${{ employee_income }}</p>
+          <h2>Employee Income</h2>
+          <p>{{ income }}</p>
       </div>
       <div class="dashboard-item">
-        <h2>Net Income</h2>
-        <p>${{ employee_net_income }}</p>
+          <h2>Tax Deduction</h2>
+          <p>{{ federal_tax|add:provincial_tax }}</p>
       </div>
       <div class="dashboard-item">
-        <h2>Deductions</h2>
-        <p>${{ employee_deductions }}</p>
+          <h2>CPP Deduction</h2>
+          <p>{{ cpp }}</p>
+      </div>
+      <div class="dashboard-item">
+          <h2>EI Deduction</h2>
+          <p>{{ ei }}</p>
+      </div>
+      <div class="dashboard-item">
+          <h2>Net Income</h2>
+          <p>{{ net_income }}</p>
       </div>
     </div>
   </div>
