@@ -1,21 +1,39 @@
-<!-- dashboard/business_dashboard.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Business Dashboard</title>
-</head>
-<body>
+{% extends './base.html' %}
+
+{% block title %}Business Dashboard{% endblock %}
+
+{% block content %}
+  <div class="dashboard">
     <h1>Business Dashboard</h1>
     <form method="get" action="{% url 'business_dashboard' %}">
-        Start Date: <input type="date" name="start_date">
-        End Date: <input type="date" name="end_date">
-        <input type="submit" value="Submit">
+      <label for="start_date">Start Date:</label>
+      <input type="date" id="start_date" name="start_date">
+      <label for="end_date">End Date:</label>
+      <input type="date" id="end_date" name="end_date">
+      <input type="submit" value="Submit">
     </form>
 
-    <h2>Selected Period: {{ start_date }} to {{ end_date }}</h2>
-    <h2>Revenue: {{ revenue }}</h2>
-    <h2>Total Expenses: {{ total_expenses }}</h2>
-    <h2>Travel Distance: {{ travel_distance }}</h2>
-    <h2>Net Income: {{ net_income }}</h2>
-</body>
-</html>
+    <div class="dashboard-info">
+      <div class="dashboard-item">
+        <h2>Selected Period</h2>
+        <p>{{ start_date }} to {{ end_date }}</p>
+      </div>
+      <div class="dashboard-item">
+        <h2>Revenue</h2>
+        <p>${{ revenue }}</p>
+      </div>
+      <div class="dashboard-item">
+        <h2>Total Expenses</h2>
+        <p>${{ total_expenses }}</p>
+      </div>
+      <div class="dashboard-item">
+        <h2>Travel Distance</h2>
+        <p>{{ travel_distance }} km</p>
+      </div>
+      <div class="dashboard-item">
+        <h2>Net Income</h2>
+        <p>${{ net_income }}</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

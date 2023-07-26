@@ -5,6 +5,8 @@ from employees.models import Employee
 from expenses.models import OperatingExpense
 from datetime import datetime  # Add this import line
 
+def default_dashboard(request):
+    return render(request, 'dashboard/default_dashboard.html')
 
 def business_dashboard(request):
     # Assuming you have a date range input on the dashboard to select the desired period

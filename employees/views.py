@@ -18,7 +18,7 @@ def employee_create(request):
     return render(request, 'employees/employee_create_form.html', {'form': form})
 
 def employee_update(request, employee_id):
-    employee = get_object_or_404(Employee, id=employee_id)
+    employee = get_object_or_404(Employee, employee_id=employee_id)
     if request.method == 'POST':
         form = EmployeeForm(request.POST, instance=employee)
         if form.is_valid():
@@ -29,7 +29,7 @@ def employee_update(request, employee_id):
     return render(request, 'employees/employee_update_form.html', {'form': form})
 
 def employee_delete(request, employee_id):
-    employee = get_object_or_404(Employee, id=employee_id)
+    employee = get_object_or_404(Employee, employee_id=employee_id)
     if request.method == 'POST':
         employee.delete()
         return redirect('employee_list')

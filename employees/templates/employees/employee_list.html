@@ -1,15 +1,14 @@
-<!-- employees/employee_list.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Employee List</title>
-</head>
-<body>
+{% extends './base.html' %}
+
+{% block title %}Employee List{% endblock %}
+
+{% block content %}
+  <div class="list-container">
     <h1>Employee List</h1>
     <ul>
-        {% for employee in employees %}
-            <li>{{ employee.name }} - {{ employee.employee_id }}</li>
-        {% endfor %}
+      {% for employee in employees %}
+        <li>{{ employee.name }} - {{ employee.employee_id }}</li>
+      {% endfor %}
     </ul>
-</body>
-</html>
+  </div>
+{% endblock %}

@@ -8,4 +8,5 @@ urlpatterns = [
     path('employees/', include('employees.urls')),
     path('expenses/', include('expenses.urls')),
     path('dashboard/', include('dashboard.urls')),
+    path('', include('dashboard.urls')),  # Add default view for dashboard
 ]

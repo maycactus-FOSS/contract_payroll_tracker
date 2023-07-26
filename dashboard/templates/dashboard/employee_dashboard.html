@@ -1,21 +1,39 @@
-<!-- dashboard/employee_dashboard.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Employee Dashboard</title>
-</head>
-<body>
+{% extends './base.html' %}
+
+{% block title %}Employee Dashboard{% endblock %}
+
+{% block content %}
+  <div class="dashboard">
     <h1>Employee Dashboard</h1>
     <form method="get" action="{% url 'employee_dashboard' employee.employee_id %}">
-        Start Date: <input type="date" name="start_date">
-        End Date: <input type="date" name="end_date">
-        <input type="submit" value="Submit">
+      <label for="start_date">Start Date:</label>
+      <input type="date" id="start_date" name="start_date">
+      <label for="end_date">End Date:</label>
+      <input type="date" id="end_date" name="end_date">
+      <input type="submit" value="Submit">
     </form>
 
-    <h2>Selected Employee: {{ employee.name }}</h2>
-    <h2>Selected Period: {{ start_date }} to {{ end_date }}</h2>
-    <h2>Employee Income: {{ employee_income }}</h2>
-    <h2>Net Income: {{ employee_net_income }}</h2>
-    <h2>Deductions: {{ employee_deductions }}</h2>
-</body>
-</html>
+    <div class="dashboard-info">
+      <div class="dashboard-item">
+        <h2>Selected Employee</h2>
+        <p>{{ employee.name }}</p>
+      </div>
+      <div class="dashboard-item">
+        <h2>Selected Period</h2>
+        <p>{{ start_date }} to {{ end_date }}</p>
+      </div>
+      <div class="dashboard-item">
+        <h2>Employee Income</h2>
+        <p>${{ employee_income }}</p>
+      </div>
+      <div class="dashboard-item">
+        <h2>Net Income</h2>
+        <p>${{ employee_net_income }}</p>
+      </div>
+      <div class="dashboard-item">
+        <h2>Deductions</h2>
+        <p>${{ employee_deductions }}</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
