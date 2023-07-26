@@ -1,0 +1,15 @@
+<!-- expenses/operating_expense_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Operating Expense List</title>
+</head>
+<body>
+    <h1>Operating Expense List</h1>
+    <ul>
+        {% for expense in expenses %}
+            <li>{{ expense.date }} - {{ expense.hours_worked }} - {{ expense.employee.name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -12,3 +12,8 @@ class OperatingExpense(models.Model):
 
     def __str__(self):
         return f"Expense for {self.employee} on {self.date}"
+
+    def total_expense(self):
+        employee_pay = self.hours_worked * self.employee.hourly_rate * (1 + self.employee.vacation_rate)
+        employer_cpp_ei_contribution = self.cpp + self.ei
+        return employee_pay + employer_cpp_ei_contribution

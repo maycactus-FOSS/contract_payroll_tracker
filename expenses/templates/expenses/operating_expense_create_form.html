@@ -1,0 +1,15 @@
+<!-- expenses/operating_expense_create_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Operating Expense</title>
+</head>
+<body>
+    <h1>Add Operating Expense</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save">
+    </form>
+</body>
+</html>

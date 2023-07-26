@@ -1,0 +1,15 @@
+<!-- expenses/operating_expense_update_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Operating Expense</title>
+</head>
+<body>
+    <h1>Edit Operating Expense</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>
