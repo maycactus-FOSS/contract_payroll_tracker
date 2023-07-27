@@ -34,15 +34,20 @@
 {% block content %}
 <div class="list-container">
   <h1>Employee List</h1>
+  <a href="{% url 'employee_create' %}" class="create-button">Create Employee</a>
   <table>
     <tr>
       <th class="sortable">Name</th>
       <th class="sortable">Employee ID</th>
+      <th>Update</th>
+      <th>Delete</th>
     </tr>
     {% for employee in employees %}
     <tr>
       <td>{{ employee.name }}</td>
       <td>{{ employee.employee_id }}</td>
+      <td><a href="{% url 'employee_update' employee_id=employee.employee_id %}" class="update-button">Update</a></td>
+      <td><a href="{% url 'employee_delete' employee_id=employee.employee_id %}" class="delete-button">Delete</a></td>
     </tr>
     {% endfor %}
   </table>

@@ -18,7 +18,7 @@ def contract_create(request):
     return render(request, 'contracts/contract_create_form.html', {'form': form})
 
 def contract_update(request, contract_id):
-    contract = get_object_or_404(Contract, id=contract_id)
+    contract = get_object_or_404(Contract, contract_id=contract_id)
     if request.method == 'POST':
         form = ContractForm(request.POST, instance=contract)
         if form.is_valid():
@@ -29,7 +29,7 @@ def contract_update(request, contract_id):
     return render(request, 'contracts/contract_update_form.html', {'form': form})
 
 def contract_delete(request, contract_id):
-    contract = get_object_or_404(Contract, id=contract_id)
+    contract = get_object_or_404(Contract, contract_id=contract_id)
     if request.method == 'POST':
         contract.delete()
         return redirect('contract_list')

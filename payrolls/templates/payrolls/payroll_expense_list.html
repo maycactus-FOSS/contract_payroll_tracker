@@ -34,17 +34,22 @@
 {% block content %}
   <div class="list-container">
     <h1>Payroll Expense List</h1>
+    <a href="{% url 'payroll_expense_create' %}" class="create-button">Create Payroll</a>
     <table >
       <tr>
         <th class="sortable">Date</th>
         <th class="sortable">Hours Worked</th>
         <th class="sortable">Employee Name</th>
+        <th>Update</th>
+        <th>Delete</th>
       </tr>
-      {% for expense in expenses %}
+      {% for payroll_expense in payroll_expenses %}
         <tr>
-          <td>{{ expense.date }}</td>
-          <td>{{ expense.hours_worked }}</td>
-          <td>{{ expense.employee.name }}</td>
+          <td>{{ payroll_expense.date }}</td>
+          <td>{{ payroll_expense.hours_worked }}</td>
+          <td>{{ payroll_expense.employee.name }}</td>
+          <td><a href="{% url 'payroll_expense_update' payroll_id=payroll_expense.payroll_id %}" class="update-button">Update</a></td>
+          <td><a href="{% url 'payroll_expense_delete' payroll_id=payroll_expense.payroll_id %}" class="delete-button">Delete</a></td>
         </tr>
       {% endfor %}
     </table>

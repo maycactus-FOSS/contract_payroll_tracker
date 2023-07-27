@@ -31,6 +31,7 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   max-width: 800px;
   margin: 0 auto;
+  position: relative;
 }
 
 h1 {
@@ -132,3 +133,59 @@ nav a {
 th.sortable {
   cursor: pointer;
 }
+
+
+.create-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 5px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.create-button:hover {
+  background-color: #45a049;
+}
+
+.create-button:focus {
+  outline: none;
+}
+
+.cancel-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.update-button,
+.delete-button,
+.cancel-button {
+  background-color: #45a049;
+  color: white;
+  padding: 4px 10px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 3px;
+  margin-left: 10px;
+}
+
+.update-button:hover,
+.delete-button:hover,
+.cancel-button:hover {
+  background-color: #45a049;
+}
+
+.update-button:focus,
+.delete-button:focus,
+.cancel-button:focus {
+  outline: none;
+}
+

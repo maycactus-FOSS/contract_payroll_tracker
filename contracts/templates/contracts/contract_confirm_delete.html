@@ -1,0 +1,16 @@
+{% extends './base.html' %}
+
+{% block title %}Confirm Delete{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <h1>Confirm Delete</h1>
+  <p>Are you sure you want to delete the contract<br>
+    {{ contract }}?</p>
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete" class="delete-button">
+    <a href="{% url 'contract_list' %}" class="cancel-button">Cancel</a>
+  </form>
+</div>
+{% endblock %}

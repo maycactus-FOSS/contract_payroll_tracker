@@ -34,17 +34,26 @@
 {% block content %}
 <div class="list-container">
   <h1>Contract List</h1>
+  <a href="{% url 'contract_create' %}" class="create-button">Create Contract</a>
   <table id="contract-table">
     <tr>
       <th class="sortable">Date</th>
       <th class="sortable">Place</th>
       <th class="sortable">Income</th>
+      <th>Update</th>
+      <th>Delete</th>
     </tr>
     {% for contract in contracts %}
       <tr>
         <td>{{ contract.date }}</td>
         <td>{{ contract.place }}</td>
         <td>${{ contract.income }}</td>
+        <td>
+          <a href="{% url 'contract_update' contract.contract_id %}" class="update-button">Update</a>
+        </td>
+        <td>
+          <a href="{% url 'contract_delete' contract.contract_id %}" class="delete-button">Delete</a>
+        </td>
       </tr>
     {% endfor %}
   </table>
