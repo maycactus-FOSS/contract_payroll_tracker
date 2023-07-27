@@ -189,3 +189,12 @@ th.sortable {
   outline: none;
 }
 
+.list-container table tr td a:hover {
+  color: #4CAF50;
+  text-decoration: underline;
+}
+
+.list-container table tr td a {
+  color: inherit;
+  text-decoration: none;
+}
