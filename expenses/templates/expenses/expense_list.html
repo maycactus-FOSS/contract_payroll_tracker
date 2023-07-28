@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense List</title>
+</head>
+<body>
+    <h1>Expense List</h1>
+    <ul>
+        {% for expense in expenses %}
+            <li>
+                Date: {{ expense.date }} | Description: {{ expense.description }} | Amount: {{ expense.amount }}
+                {% if expense.receipt_file %}
+                    | <a href="{{ expense.receipt.url }}" target="_blank">View Receipt</a>
+                {% else %}
+                    | No Receipt Attached
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
