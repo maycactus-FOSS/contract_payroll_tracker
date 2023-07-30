@@ -39,9 +39,11 @@ def payroll_expense_detail(request, pk):
 
     total_expense = payroll_expense.calculate_total_expense()
     total_remittance = payroll_expense.calculate_total_remittance()
+    net_payment = total_expense - total_remittance
 
     return render(request, 'payrolls/payroll_expense_detail.html', {
         'payroll_expense': payroll_expense,
         'total_expense': total_expense,
         'total_remittance': total_remittance,
+        'net_payment': net_payment,
     })

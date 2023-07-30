@@ -25,6 +25,10 @@
         <td>$ {{ total_remittance|floatformat:2 }}</td>
       </tr>
       <tr>
+        <th>Net Payment</th>
+        <td>$ {{ net_payment|floatformat:2 }}</td>
+      </tr>
+      <tr>
         <th>Hours Worked</th>
         <td>{{ payroll_expense.hours_worked|floatformat:2 }} hrs</td>
       </tr>
