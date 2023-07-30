@@ -8,7 +8,30 @@
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <table>
-        {{ form.as_table }}
+        <tr>
+          <th>{{ form.date.label_tag }}</th>
+          <td>{{ form.date }}</td>
+        </tr>
+        <tr>
+          <th>{{ form.description.label_tag }}</th>
+          <td>{{ form.description }}</td>
+        </tr>
+        <tr>
+          <th>{{ form.amount.label_tag }}</th>
+          <td>{{ form.amount }}</td>
+        </tr>
+        <tr>
+          <th>{{ form.receipt.label_tag }}</th>
+          <td>{{ form.receipt }}</td>
+        </tr>
+        <tr>
+          <th>{{ form.is_travel_allowance.label_tag }}</th>
+          <td>{{ form.is_travel_allowance }} Check for Travel</td>
+        </tr>
+        <tr id="travel_distance_row">
+          <th>{{ form.travel_distance.label_tag }}</th>
+          <td>{{ form.travel_distance }}</td>
+        </tr>
       </table>
       <div class="actions">
         <input type="submit" value="Save">
@@ -16,3 +39,18 @@
     </form>
   </div>
 {% endblock content %}
+
+{% block script %}
+  <script>
+    // JavaScript code to toggle the visibility of the travel_distance field
+    const travelAllowanceCheckbox = document.getElementById("id_is_travel_allowance");
+    const travelDistanceRow = document.getElementById("travel_distance_row");
+
+    // Set the initial visibility based on the checkbox state
+    travelDistanceRow.style.display = travelAllowanceCheckbox.checked ? "table-row" : "none";
+
+    travelAllowanceCheckbox.addEventListener("change", function () {
+      travelDistanceRow.style.display = this.checked ? "table-row" : "none";
+    });
+  </script>
+{% endblock script %}

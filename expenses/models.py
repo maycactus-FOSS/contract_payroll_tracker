@@ -5,6 +5,8 @@ class Expense(models.Model):
     date = models.DateField()
     description = models.CharField(max_length=25)
     amount = models.DecimalField(max_digits=8, decimal_places=2)
+    is_travel_allowance = models.BooleanField(default=False)
+    travel_distance = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
     receipt = models.FileField(upload_to='receipts/', blank=True, null=True)
 
     def __str__(self):

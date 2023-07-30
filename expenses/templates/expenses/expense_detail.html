@@ -30,6 +30,12 @@
           {% endif %}
         </td>
       </tr>
+      {% if expense.is_travel_allowance %}
+      <tr>
+        <th>Travel Distance</th>
+        <td>{{ expense.travel_distance|floatformat:0 }} km</td>
+      </tr>
+      {% endif %}
     </table>
     <div class="actions">
       <a href="{% url 'expense_update' pk=expense.pk %}" class="update-button">Edit</a>
