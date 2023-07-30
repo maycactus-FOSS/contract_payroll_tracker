@@ -1,4 +1,4 @@
-# Contract Payroll Tracker (WIP)
+# Contract Payroll Tracker
 
 Contract Payroll Tracker is a comprehensive software tool designed to streamline business operations by efficiently managing contracts, employee payroll, and expense tracking.
 
