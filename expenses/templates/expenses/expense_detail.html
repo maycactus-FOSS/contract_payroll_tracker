@@ -1,0 +1,39 @@
+{% extends './base.html' %}
+
+{% block custom_title %}Detail{% endblock custom_title %}
+
+{% block content %}
+  <div class="detail-container">
+    <h2>Expense Detail</h2>
+    <table>
+      <tr>
+        <th>Date</th>
+        <td>{{ expense.date }}</td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td>
+          {{ expense.description }}
+        </td>
+      </tr>
+      <tr>
+        <th>Amount</th>
+        <td>$ {{ expense.amount|floatformat:2 }}</td>
+      </tr>
+      <tr>
+        <th>Receipt</th>
+        <td>
+          {% if expense.receipt %}
+            <a href="{{ expense.receipt.url }}" target="_blank">View Receipt</a>
+          {% else %}
+            No Receipt uploaded.
+          {% endif %}
+        </td>
+      </tr>
+    </table>
+    <div class="actions">
+      <a href="{% url 'expense_update' pk=expense.pk %}" class="update-button">Edit</a>
+      <a href="{% url 'expense_delete' pk=expense.pk %}" class="delete-button">Delete</a>
+    </div>
+  </div>
+{% endblock content %}

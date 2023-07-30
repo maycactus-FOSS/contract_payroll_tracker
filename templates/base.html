@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    {% block head %}{% endblock head %}
+</head>
+
+<body>
+    <header>
+        {% include 'base_header.html' %}
+        {% block header %}{% endblock header %}
+    </header>
+    <div class="container">
+        {% block content %}
+        {% endblock content %}
+    </div>
+    <footer>
+        {% block footer %}{% endblock footer %}
+        {% include 'base_footer.html' %}
+        {% block script %}{% endblock script %}
+    </footer>
+</body>
+
+</html>

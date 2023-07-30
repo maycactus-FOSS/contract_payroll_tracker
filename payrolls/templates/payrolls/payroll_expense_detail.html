@@ -1,0 +1,53 @@
+{% extends './base.html' %}
+
+{% block custom_title %}Detail{% endblock custom_title %}
+
+{% block content %}
+  <div class="detail-container">
+    <h2>Payroll Expense Detail</h2>
+    <table>
+      <tr>
+        <th>Date</th>
+        <td>{{ payroll_expense.date }}</td>
+      </tr>
+      <tr>
+        <th>Employee Name</th>
+        <td>
+          {{ payroll_expense.employee.name }}
+        </td>
+      </tr>
+      <tr>
+        <th>Total Expense</th>
+        <td>$ {{ total_expense|floatformat:2 }}</td>
+      </tr>
+      <tr>
+        <th>Total Remittance</th>
+        <td>$ {{ total_remittance|floatformat:2 }}</td>
+      </tr>
+      <tr>
+        <th>Hours Worked</th>
+        <td>{{ payroll_expense.hours_worked|floatformat:2 }} hrs</td>
+      </tr>
+      <tr>
+        <th>Federal Tax</th>
+        <td>$ {{ payroll_expense.federal_tax|floatformat:2 }}</td>
+      </tr>
+      <tr>
+        <th>Provincial Tax</th>
+        <td>$ {{ payroll_expense.provincial_tax|floatformat:2 }}</td>
+      </tr>
+      <tr>
+        <th>CPP</th>
+        <td>$ {{ payroll_expense.cpp|floatformat:2 }}</td>
+      </tr>
+      <tr>
+        <th>EI</th>
+        <td>$ {{ payroll_expense.ei|floatformat:2 }}</td>
+      </tr>
+    </table>
+    <div class="actions">
+      <a href="{% url 'payroll_expense_update' pk=payroll_expense.pk %}" class="update-button">Edit</a>
+      <a href="{% url 'payroll_expense_delete' pk=payroll_expense.pk %}" class="delete-button">Delete</a>
+    </div>
+  </div>
+{% endblock content %}

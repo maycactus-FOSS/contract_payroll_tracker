@@ -5,12 +5,12 @@
 {% block content %}
 <div class="form-container">
   <h2>Confirm Delete</h2>
-  <p>Are you sure you want to delete the contract<br>
-    {{ contract }}?</p>
+  <p>Are you sure you want to delete the expense<br>
+    {{ expense }}?</p>
   <form method="post">
     {% csrf_token %}
     <input type="submit" value="Delete" class="delete-button">
-    <a href="{% url 'contract_list' %}" class="cancel-button">Cancel</a>
+    <a href="{% url 'expense_list' %}" class="cancel-button">Cancel</a>
   </form>
 </div>
 {% endblock content %}

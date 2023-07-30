@@ -6,7 +6,7 @@ def expense_list(request):
     expenses = Expense.objects.all()
     return render(request, 'expenses/expense_list.html', {'expenses': expenses})
 
-def create_expense(request):
+def expense_create(request):
     if request.method == 'POST':
         form = ExpenseForm(request.POST, request.FILES)
         if form.is_valid():
@@ -14,9 +14,9 @@ def create_expense(request):
             return redirect('expense_list')
     else:
         form = ExpenseForm()
-    return render(request, 'expenses/create_expense.html', {'form': form})
+    return render(request, 'expenses/expense_create_form.html', {'form': form})
 
-def update_expense(request, pk):
+def expense_update(request, pk):
     expense = get_object_or_404(Expense, pk=pk)
     if request.method == 'POST':
         form = ExpenseForm(request.POST, request.FILES, instance=expense)
@@ -25,11 +25,15 @@ def update_expense(request, pk):
             return redirect('expense_list')
     else:
         form = ExpenseForm(instance=expense)
-    return render(request, 'expenses/update_expense.html', {'form': form})
+    return render(request, 'expenses/expense_update_form.html', {'form': form})
 
-def delete_expense(request, pk):
+def expense_delete(request, pk):
     expense = get_object_or_404(Expense, pk=pk)
     if request.method == 'POST':
         expense.delete()
         return redirect('expense_list')
-    return render(request, 'expenses/confirm_delete_expense.html', {'expense': expense})
+    return render(request, 'expenses/expense_confirm_delete.html', {'expense': expense})
+
+def expense_detail(request, pk):
+    expense = get_object_or_404(Expense, pk=pk)
+    return render(request, 'expenses/expense_detail.html', {'expense': expense})

@@ -1,0 +1,43 @@
+{% extends './base.html' %}
+
+{% block custom_title %}Detail{% endblock custom_title %}
+
+{% block content %}
+  <div class="detail-container">
+    <h2>Contract Detail</h2>
+    <table>
+      <tr>
+        <th>Date</th>
+        <td>{{ contract.date }}</td>
+      </tr>
+      <tr>
+        <th>Place</th>
+        <td>
+          {{ contract.place }}
+        </td>
+      </tr>
+      <tr>
+        <th>Income</th>
+        <td>$ {{ contract.income|floatformat:2 }}</td>
+      </tr>
+      <tr>
+        <th>Travel Distance</th>
+        <td>{{ contract.travel_distance|floatformat:0 }} km</td>
+      </tr>
+      <tr>
+        <th>Invoice</th>
+        <td>
+          {% if contract.invoice %}
+            <a href="{{ contract.invoice.url }}" target="_blank">View Invoice</a>
+          {% else %}
+            No invoice uploaded.
+          {% endif %}
+        </td>
+      </tr>
+    </table>
+    <div class="actions">
+      <a href="{% url 'contract_update' pk=contract.pk %}" class="update-button">Edit</a>
+      <a href="{% url 'contract_delete' pk=contract.pk %}" class="delete-button">Delete</a>
+    </div>
+  </div>
+{% endblock content %}

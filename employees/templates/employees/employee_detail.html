@@ -1,0 +1,34 @@
+{% extends './base.html' %}
+
+{% block custom_title %}Detail{% endblock custom_title %}
+
+{% block content %}
+  <div class="detail-container">
+    <h2>Employee Detail</h2>
+    <table>
+      <tr>
+        <th>ID</th>
+        <td>{{ employee.pk }}</td>
+      </tr>
+      <tr>
+        <th>Name</th>
+        <td>
+          {{ employee.name }}
+        </td>
+      </tr>
+      <tr>
+        <th>Hourly Rate</th>
+        <td>$ {{ employee.hourly_rate|floatformat:2 }}</td>
+      </tr>
+      <tr>
+        <th>Vacation Rate</th>
+        <td>{{ vacation_rate|floatformat:0 }} %</td>
+      </tr>
+    </table>
+    <div class="actions">
+      <a href="{% url 'employee_dashboard' pk=employee.pk %}" class="dashboard-button">Employee Dashboard</a>
+      <a href="{% url 'employee_update' pk=employee.pk %}" class="update-button">Edit</a>
+      <a href="{% url 'employee_delete' pk=employee.pk %}" class="delete-button">Delete</a>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,16 +1,18 @@
 {% extends './base.html' %}
 
-{% block title %}Edit Contract{% endblock %}
+{% block custom_title %}Edit{% endblock custom_title %}
 
 {% block content %}
-<div class="form-container">
-  <h1>Edit Contract</h1>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-    </table>
-    <input type="submit" value="Update">
-  </form>
-</div>
-{% endblock %}
+  <div class="form-container">
+    <h2>Edit Contract</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <table>
+        {{ form.as_table }}
+      </table>
+      <div class="actions">
+        <input type="submit" value="Update">
+      </div>
+    </form>
+  </div>
+{% endblock content %}

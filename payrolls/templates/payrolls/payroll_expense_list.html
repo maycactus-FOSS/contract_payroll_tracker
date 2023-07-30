@@ -1,13 +1,36 @@
 {% extends './base.html' %}
 {% load static %}
 
-{% block title %}Payroll Expense List{% endblock title %}
+{% block custom_title %}List{% endblock custom_title %}
+
+{% block content %}
+  <div class="list-container">
+    <h2>Payroll Expense List</h2>
+    <a href="{% url 'payroll_expense_create' %}" class="create-button">Add Payroll</a>
+    <table >
+      <tr>
+        <th class="sortable col-3">Date</th>
+        <th class="sortable col-4">Name</th>
+        <th class="sortable col-3">Hours Worked</th>
+        <th class="col-2">Detail</th>
+      </tr>
+      {% for payroll_expense in payroll_expenses %}
+        <tr>
+          <td>{{ payroll_expense.date }}</td>
+          <td>{{ payroll_expense.employee.name }}</td>
+          <td>{{ payroll_expense.hours_worked|floatformat:2 }} hrs</td>
+          <td><a href="{% url 'payroll_expense_detail' pk=payroll_expense.pk %}" class="detail-button">Detail</a></td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock content %}
 
 {% block script %}
-<script src="{% static 'payrolls/js/jquery-3.7.0.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
 <script>
   $(document).ready(function() {
-    $("#payroll-table th").click(function() {
+    $("th").click(function() {
         var table = $(this).parents('table').eq(0);
         var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
         this.asc = !this.asc;
@@ -30,28 +53,3 @@
   });
 </script>
 {% endblock script %}
-
-{% block content %}
-  <div class="list-container">
-    <h1>Payroll Expense List</h1>
-    <a href="{% url 'payroll_expense_create' %}" class="create-button">Create Payroll</a>
-    <table >
-      <tr>
-        <th class="sortable">Date</th>
-        <th class="sortable">Hours Worked</th>
-        <th class="sortable">Employee Name</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-      {% for payroll_expense in payroll_expenses %}
-        <tr>
-          <td>{{ payroll_expense.date }}</td>
-          <td>{{ payroll_expense.hours_worked }}</td>
-          <td>{{ payroll_expense.employee.name }}</td>
-          <td><a href="{% url 'payroll_expense_update' payroll_id=payroll_expense.payroll_id %}" class="update-button">Update</a></td>
-          <td><a href="{% url 'payroll_expense_delete' payroll_id=payroll_expense.payroll_id %}" class="delete-button">Delete</a></td>
-        </tr>
-      {% endfor %}
-    </table>
-  </div>
-{% endblock content %}

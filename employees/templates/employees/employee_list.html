@@ -1,55 +1,53 @@
 {% extends './base.html' %}
 {% load static %}
 
-{% block title %}Employee List{% endblock title %}
-
-{% block script %}
-<script src="{% static 'employees/js/jquery-3.7.0.min.js' %}"></script>
-<script>
-  $(document).ready(function () {
-    $("#employee-table th").click(function () {
-      var table = $(this).parents('table').eq(0);
-      var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
-      this.asc = !this.asc;
-      if (!this.asc) {
-        rows = rows.reverse();
-      }
-      for (var i = 0; i < rows.length; i++) {
-        table.append(rows[i]);
-      }
-    });
-    function comparer(index) {
-      return function (a, b) {
-        var valA = getCellValue(a, index), valB = getCellValue(b, index);
-        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB);
-      };
-    }
-    function getCellValue(row, index) {
-      return $(row).children('td').eq(index).text();
-    }
-  });
-</script>
-{% endblock script %}
+{% block custom_title %}List{% endblock custom_title %}
 
 {% block content %}
 <div class="list-container">
-  <h1>Employee List</h1>
-  <a href="{% url 'employee_create' %}" class="create-button">Create Employee</a>
+  <h2>Employee List</h2>
+  <a href="{% url 'employee_create' %}" class="create-button">Add Employee</a>
   <table>
     <tr>
-      <th class="sortable">Name</th>
-      <th class="sortable">Employee ID</th>
-      <th>Update</th>
-      <th>Delete</th>
+      <th class="sortable col-3">ID</th>
+      <th class="sortable col-7">Name</th>
+      <th class="col-2">Detail</th>
     </tr>
     {% for employee in employees %}
     <tr>
-      <td><a href="{% url 'employee_dashboard' employee.employee_id %}">{{ employee.name }}</a></td>
       <td>{{ employee.employee_id }}</td>
-      <td><a href="{% url 'employee_update' employee_id=employee.employee_id %}" class="update-button">Update</a></td>
-      <td><a href="{% url 'employee_delete' employee_id=employee.employee_id %}" class="delete-button">Delete</a></td>
+      <td>{{ employee.name }}</td>
+      <td><a href="{% url 'employee_detail' pk=employee.pk %}" class="detail-button">Detail</a></td>
     </tr>
     {% endfor %}
   </table>
 </div>
 {% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
+<script>
+  $(document).ready(function() {
+    $("th").click(function() {
+        var table = $(this).parents('table').eq(0);
+        var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
+        this.asc = !this.asc;
+        if (!this.asc) {
+          rows = rows.reverse();
+        }
+        for (var i = 0; i < rows.length; i++) {
+          table.append(rows[i]);
+        }
+      });
+  function comparer(index) {
+    return function(a, b) {
+      var valA = getCellValue(a, index), valB = getCellValue(b, index);
+      return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB);
+    };
+  }
+  function getCellValue(row, index) {
+    return $(row).children('td').eq(index).text();
+  }
+  });
+</script>
+{% endblock script %}

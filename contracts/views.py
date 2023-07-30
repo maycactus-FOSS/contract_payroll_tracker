@@ -1,4 +1,3 @@
-# contracts/views.py
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Contract
 from .forms import ContractForm
@@ -34,3 +33,7 @@ def contract_delete(request, pk):
         contract.delete()
         return redirect('contract_list')
     return render(request, 'contracts/contract_confirm_delete.html', {'contract': contract})
+
+def contract_detail(request, pk):
+    contract = get_object_or_404(Contract, pk=pk)
+    return render(request, 'contracts/contract_detail.html', {'contract': contract})

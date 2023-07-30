@@ -34,3 +34,13 @@ def employee_delete(request, pk):
         employee.delete()
         return redirect('employee_list')
     return render(request, 'employees/employee_confirm_delete.html', {'employee': employee})
+
+def employee_detail(request, pk):
+    employee = get_object_or_404(Employee, pk=pk)
+
+    vacation_rate = employee.vacation_rate * 100
+
+    return render(request, 'employees/employee_detail.html', {
+        'employee': employee,
+        'vacation_rate': vacation_rate
+        })

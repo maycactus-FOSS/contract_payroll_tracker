@@ -1,11 +1,11 @@
 {% extends './base.html' %}
 
-{% block title %}Employee Dashboard{% endblock %}
+{% block custom_title %}Employee{% endblock custom_title %}
 
 {% block content %}
   <div class="dashboard">
-    <h1>Employee Dashboard</h1>
-    <form method="get" action="{% url 'employee_dashboard' employee.employee_id %}">
+    <h2>Employee Dashboard</h2>
+    <form method="get" action="{% url 'employee_dashboard' employee.pk %}">
       <label for="start_date">Start Date:</label>
       <input type="date" id="start_date" name="start_date">
       <label for="end_date">End Date:</label>
@@ -15,33 +15,33 @@
 
     <div class="dashboard-info">
       <div class="dashboard-item">
-          <h2>Selected Employee</h2>
-          <p>{{ employee.name }}</p>
+        <h3>Employee</h3>
+        <p>{{ employee.name }}</p>
       </div>
       <div class="dashboard-item">
-          <h2>Selected Period</h2>
-          <p>{{ start_date }} to {{ end_date }}</p>
+        <h3>Period</h3>
+        <p>{{ start_date }} ~ {{ end_date }}</p>
       </div>
       <div class="dashboard-item">
-          <h2>Employee Income</h2>
-          <p>{{ income }}</p>
+        <h3>Income</h3>
+        <p>$ {{ income|floatformat:2 }}</p>
       </div>
       <div class="dashboard-item">
-          <h2>Tax Deduction</h2>
-          <p>{{ federal_tax|add:provincial_tax }}</p>
+        <h3>Net Income</h3>
+        <p>$ {{ net_income|floatformat:2 }}</p>
       </div>
       <div class="dashboard-item">
-          <h2>CPP Deduction</h2>
-          <p>{{ cpp }}</p>
+        <h3>Tax Deduction</h3>
+        <p>$ {{ federal_tax|add:provincial_tax|floatformat:2 }}</p>
       </div>
       <div class="dashboard-item">
-          <h2>EI Deduction</h2>
-          <p>{{ ei }}</p>
+        <h3>CPP Deduction</h3>
+        <p>$ {{ cpp|floatformat:2 }}</p>
       </div>
       <div class="dashboard-item">
-          <h2>Net Income</h2>
-          <p>{{ net_income }}</p>
+        <h3>EI Deduction</h3>
+        <p>$ {{ ei|floatformat:2 }}</p>
       </div>
     </div>
   </div>
-{% endblock %}
+{% endblock content %}

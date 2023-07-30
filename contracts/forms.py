@@ -5,7 +5,7 @@ from .models import Contract
 class ContractForm(forms.ModelForm):
     class Meta:
         model = Contract
-        fields = ['date', 'place', 'income', 'travel_distance', 'expense', 'invoice']
+        fields = ['date', 'place', 'income', 'travel_distance', 'invoice']
 
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'}),

@@ -33,3 +33,15 @@ def payroll_expense_delete(request, pk):
         payroll_expense.delete()
         return redirect('payroll_expense_list')
     return render(request, 'payrolls/payroll_expense_confirm_delete.html', {'payroll_expense': payroll_expense})
+
+def payroll_expense_detail(request, pk):
+    payroll_expense = get_object_or_404(PayrollExpense, pk=pk)
+
+    total_expense = payroll_expense.calculate_total_expense()
+    total_remittance = payroll_expense.calculate_total_remittance()
+
+    return render(request, 'payrolls/payroll_expense_detail.html', {
+        'payroll_expense': payroll_expense,
+        'total_expense': total_expense,
+        'total_remittance': total_remittance,
+    })

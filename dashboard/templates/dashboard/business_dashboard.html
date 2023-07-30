@@ -1,10 +1,10 @@
 {% extends './base.html' %}
 
-{% block title %}Business Dashboard{% endblock %}
+{% block custom_title %}Business{% endblock custom_title %}
 
 {% block content %}
   <div class="dashboard">
-    <h1>Business Dashboard</h1>
+    <h2>Business Dashboard</h2>
     <form method="get" action="{% url 'business_dashboard' %}">
       <label for="start_date">Start Date:</label>
       <input type="date" id="start_date" name="start_date">
@@ -15,25 +15,29 @@
 
     <div class="dashboard-info">
       <div class="dashboard-item">
-        <h2>Selected Period</h2>
-        <p>{{ start_date }} to {{ end_date }}</p>
+        <h3>Period</h3>
+        <p>{{ start_date }} ~ {{ end_date }}</p>
       </div>
       <div class="dashboard-item">
-        <h2>Revenue</h2>
-        <p>${{ revenue }}</p>
+        <h3>Revenue</h3>
+        <p>$ {{ revenue|floatformat:2 }}</p>
       </div>
       <div class="dashboard-item">
-        <h2>Total Expenses</h2>
-        <p>${{ total_expenses }}</p>
+        <h3>Net Income</h3>
+        <p>$ {{ net_income|floatformat:2 }}</p>
       </div>
       <div class="dashboard-item">
-        <h2>Travel Distance</h2>
-        <p>{{ travel_distance }} km</p>
+        <h3>Expense</h3>
+        <p>$ {{ total_expense|floatformat:2 }}</p>
       </div>
       <div class="dashboard-item">
-        <h2>Net Income</h2>
-        <p>${{ net_income }}</p>
+        <h3>Payroll Expense</h3>
+        <p>$ {{ total_payroll_expense|floatformat:2 }}</p>
+      </div>
+      <div class="dashboard-item">
+        <h3>Travel Distance</h3>
+        <p>{{ travel_distance|floatformat:0 }} km</p>
       </div>
     </div>
   </div>
-{% endblock %}
+{% endblock content %}
