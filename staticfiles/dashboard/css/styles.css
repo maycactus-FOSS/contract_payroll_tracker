@@ -1,0 +1,63 @@
+h2,
+h3,
+p {
+  text-align: center;
+}
+
+/* Dashboard styles */
+.dashboard {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 20px auto 0;
+  max-width: 800px;
+  position: relative;
+}
+
+/* Updated styles for dashboard items */
+.dashboard-info {
+  display: flex;
+  flex-direction: column; /* Changed to column */
+  margin-top: 30px;
+}
+
+.dashboard-item {
+  display: flex; /* Added to use flexbox */
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Move this here to have consistent spacing between items */
+}
+
+/* Align h3 on the left and p on the right */
+.dashboard-item h3,
+.dashboard-item p {
+  margin: 16px 0
+}
+
+.dashboard-item h3 {
+  margin-right: 10px;
+  flex-basis: 30%; /* Adjust the width as needed */
+}
+
+.dashboard-item p {
+  flex: 1; /* Takes the remaining space */
+}
+
+/* Additional classes for responsive layout */
+@media (max-width: 768px) {
+  .dashboard-item {
+    flex-direction: column;
+  }
+
+  .dashboard form {
+    flex-direction: column;
+  }
+
+  .dashboard form input[type="date"] {
+    margin-bottom: 10px;
+  }
+}

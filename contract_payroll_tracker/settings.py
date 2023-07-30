@@ -26,8 +26,9 @@ SECRET_KEY = 'django-insecure-kdagp#nrysn%01i7bnlhk)jk-l*zesbajofm^iomcdex#i9cp0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['127.0.0.1']
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Application definition
 
@@ -41,8 +42,8 @@ INSTALLED_APPS = [
     'contracts',
     'dashboard',
     'employees',
-    'payrolls',
     'expenses',
+    'payrolls',
 ]
 
 MIDDLEWARE = [
@@ -126,6 +127,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+# Set the STATIC_ROOT
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
