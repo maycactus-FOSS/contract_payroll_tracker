@@ -34,3 +34,8 @@ Contributions are welcome! If you find any issues or have suggestions, please su
 ## License
 
 This project is licensed under the GNU General Public License v3.0.
+
+## Notes
+
+- DEBUG is not set to False. Set DEBUG=False in the settings.py for the production environment.
+- In production, ensure that the web server (e.g., Nginx or Apache) is properly configured to serve static files and to handle the Django application using WSGI (uWSGI or Gunicorn).
