@@ -28,7 +28,10 @@
       </div>
       <div class="dashboard-item">
         <h3>Expense</h3>
-        <p>$ {{ total_expense|floatformat:2 }}</p>
+        <p>
+          $ {{ total_expense|floatformat:2 }} 
+          (Travel Allowance: $ {{ total_travel_allowance_expense|floatformat:2 }})
+        </p>
       </div>
       <div class="dashboard-item">
         <h3>Payroll Expense</h3>
@@ -36,7 +39,10 @@
       </div>
       <div class="dashboard-item">
         <h3>Travel Distance</h3>
-        <p>{{ travel_distance|floatformat:0 }} km</p>
+        <p>
+          {{ travel_distance|floatformat:0 }} km
+          (Travel Distance Paid: {{ total_travel_distance_paid|floatformat:0 }} km)
+        </p>
       </div>
     </div>
   </div>
