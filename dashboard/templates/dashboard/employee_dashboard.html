@@ -6,11 +6,23 @@
   <div class="dashboard">
     <h2>Employee Dashboard</h2>
     <form method="get" action="{% url 'employee_dashboard' employee.pk %}">
-      <label for="start_date">Start Date:</label>
-      <input type="date" id="start_date" name="start_date">
-      <label for="end_date">End Date:</label>
-      <input type="date" id="end_date" name="end_date">
-      <input type="submit" value="Submit">
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="form-group">
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group">
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <input type="submit" value="Submit">
+        </div>
+      </div>
     </form>
 
     <div class="dashboard-info">

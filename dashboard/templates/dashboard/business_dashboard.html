@@ -6,11 +6,23 @@
   <div class="dashboard">
     <h2>Business Dashboard</h2>
     <form method="get" action="{% url 'business_dashboard' %}">
-      <label for="start_date">Start Date:</label>
-      <input type="date" id="start_date" name="start_date">
-      <label for="end_date">End Date:</label>
-      <input type="date" id="end_date" name="end_date">
-      <input type="submit" value="Submit">
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="form-group">
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group">
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <input type="submit" value="Submit">
+        </div>
+      </div>
     </form>
 
     <div class="dashboard-info">
@@ -29,7 +41,7 @@
       <div class="dashboard-item">
         <h3>Expense</h3>
         <p>
-          $ {{ total_expense|floatformat:2 }} 
+          $ {{ total_expense|floatformat:2 }} <br class="mobile-show">
           (Travel Allowance: $ {{ total_travel_allowance_expense|floatformat:2 }})
         </p>
       </div>
@@ -40,8 +52,8 @@
       <div class="dashboard-item">
         <h3>Travel Distance</h3>
         <p>
-          {{ travel_distance|floatformat:0 }} km
-          (Travel Distance Paid: {{ total_travel_distance_paid|floatformat:0 }} km)
+          {{ travel_distance|floatformat:0 }} km <br class="mobile-show">
+          (Travel Allowance Paid: {{ total_travel_distance_paid|floatformat:0 }} km)
         </p>
       </div>
     </div>

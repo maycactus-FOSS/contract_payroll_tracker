@@ -11,15 +11,16 @@
     <tr>
       <th class="sortable col-3">Date</th>
       <th class="sortable col-4">Place</th>
-      <th class="sortable col-3">Income</th>
-      <th class="col-2">Detail</th>
+      <th class="sortable col-3 desktop-show">Income</th>
+      <th class="col-2 desktop-show">Detail</th>
     </tr>
     {% for contract in contracts %}
     <tr>
       <td>{{ contract.date }}</td>
-      <td>{{ contract.place }}</td>
-      <td>$ {{ contract.income|floatformat:2 }}</td>
-      <td><a href="{% url 'contract_detail' pk=contract.pk %}" class="detail-button">Detail</a></td>
+      <td class="desktop-show">{{ contract.place }}</td>
+      <td class="mobile-show"><a href="{% url 'contract_detail' pk=contract.pk %}">{{ contract.place }}</a></td>
+      <td class="desktop-show">$ {{ contract.income|floatformat:2 }}</td>
+      <td class="desktop-show"><a href="{% url 'contract_detail' pk=contract.pk %}" class="detail-button">Detail</a></td>
     </tr>
     {% endfor %}
   </table>

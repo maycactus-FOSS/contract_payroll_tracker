@@ -11,13 +11,14 @@
     <tr>
       <th class="sortable col-3">ID</th>
       <th class="sortable col-7">Name</th>
-      <th class="col-2">Detail</th>
+      <th class="col-2 desktop-show">Detail</th>
     </tr>
     {% for employee in employees %}
     <tr>
       <td>{{ employee.employee_id }}</td>
-      <td>{{ employee.name }}</td>
-      <td><a href="{% url 'employee_detail' pk=employee.pk %}" class="detail-button">Detail</a></td>
+      <td class="desktop-show">{{ employee.name }}</td>
+      <td class="mobile-show"><a href="{% url 'employee_detail' pk=employee.pk %}">{{ employee.name }}</a></td>
+      <td class="desktop-show"><a href="{% url 'employee_detail' pk=employee.pk %}" class="detail-button">Detail</a></td>
     </tr>
     {% endfor %}
   </table>

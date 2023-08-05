@@ -1,13 +1,18 @@
-<header>
-  <h1>Contract Payroll Tracker</h1>
-  <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="{% url 'business_dashboard' %}">Dashboard</a></li>
-      <li><a href="{% url 'contract_list' %}">Contracts</a></li>
-      <li><a href="{% url 'expense_list' %}">Expenses</a></li>
-      <li><a href="{% url 'employee_list' %}">Employees</a></li>
-      <li><a href="{% url 'payroll_expense_list' %}">Payrolls</a></li>
-    </ul>
-  </nav>
-</header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient">
+  <div class="container">
+    <a class="navbar-brand" href="/">Contract Payroll Tracker</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="{% url 'business_dashboard' %}">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'contract_list' %}">Contracts</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'expense_list' %}">Expenses</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'employee_list' %}">Employees</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'payroll_expense_list' %}">Payrolls</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

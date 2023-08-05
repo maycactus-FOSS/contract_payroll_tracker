@@ -11,15 +11,16 @@
       <tr>
         <th class="sortable col-3">Date</th>
         <th class="sortable col-4">Name</th>
-        <th class="sortable col-3">Hours Worked</th>
-        <th class="col-2">Detail</th>
+        <th class="sortable col-3 desktop-show">Hours Worked</th>
+        <th class="col-2 desktop-show">Detail</th>
       </tr>
       {% for payroll_expense in payroll_expenses %}
         <tr>
           <td>{{ payroll_expense.date }}</td>
-          <td>{{ payroll_expense.employee.name }}</td>
-          <td>{{ payroll_expense.hours_worked|floatformat:2 }} hrs</td>
-          <td><a href="{% url 'payroll_expense_detail' pk=payroll_expense.pk %}" class="detail-button">Detail</a></td>
+          <td class="desktop-show">{{ payroll_expense.employee.name }}</td>
+          <td class="mobile-show"><a href="{% url 'payroll_expense_detail' pk=payroll_expense.pk %}">{{ payroll_expense.employee.name }}</a></td>
+          <td class="desktop-show">{{ payroll_expense.hours_worked|floatformat:2 }} hrs</td>
+          <td class="desktop-show"><a href="{% url 'payroll_expense_detail' pk=payroll_expense.pk %}" class="detail-button">Detail</a></td>
         </tr>
       {% endfor %}
     </table>
