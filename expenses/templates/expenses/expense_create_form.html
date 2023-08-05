@@ -47,10 +47,10 @@
     const travelDistanceRow = document.getElementById("travel_distance_row");
 
     // Set the initial visibility based on the checkbox state
-    travelDistanceRow.style.display = travelAllowanceCheckbox.checked ? "table-row" : "none";
+    travelDistanceRow.style.display = travelAllowanceCheckbox.checked ? "" : "none";
 
     travelAllowanceCheckbox.addEventListener("change", function () {
-      travelDistanceRow.style.display = this.checked ? "table-row" : "none";
+      travelDistanceRow.style.display = this.checked ? "" : "none";
     });
   </script>
 {% endblock script %}
