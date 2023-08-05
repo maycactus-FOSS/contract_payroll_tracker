@@ -1,11 +1,47 @@
 # employees/views.py
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Employee
 from .forms import EmployeeForm
 
 def employee_list(request):
-    employees = Employee.objects.all()
-    return render(request, 'employees/employee_list.html', {'employees': employees})
+    clicked_column = request.GET.get('sort_column')
+
+    sort_column = request.session.get('sort_column', 'pk')
+    sort_order = request.session.get('sort_order', 'asc')
+
+    if clicked_column:
+        if sort_column != clicked_column:
+            sort_column = clicked_column
+            sort_order = 'asc'
+        else:
+            sort_order = 'asc' if sort_order == 'desc' else 'desc'
+
+    request.session['sort_column'] = sort_column
+    request.session['sort_order'] = sort_order
+
+    if sort_order == 'asc':
+        employees = Employee.objects.order_by(sort_column)
+    else:
+        employees = Employee.objects.order_by('-' + sort_column)
+
+    items_per_page = int(request.GET.get('items_per_page', 10))
+    
+    paginator = Paginator(employees, items_per_page)
+    page = request.GET.get('page')
+
+    try:
+        employees_page = paginator.page(page)
+    except PageNotAnInteger:
+        employees_page = paginator.page(1)
+    except EmptyPage:
+        employees_page = paginator.page(paginator.num_pages)
+    
+    context = {
+        'employees': employees_page,
+        'items_per_page': items_per_page,
+    }
+    return render(request, 'employees/employee_list.html', context=context)
 
 def employee_create(request):
     if request.method == 'POST':

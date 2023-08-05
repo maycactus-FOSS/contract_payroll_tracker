@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'contract_payroll_tracker.middleware.FlushSessionOnPageChangeMiddleware',
 ]
 
 ROOT_URLCONF = 'contract_payroll_tracker.urls'

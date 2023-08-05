@@ -127,6 +127,10 @@ th {
         margin-bottom: 15px;
         /* Add some spacing between rows */
     }
+
+    table {
+        margin-top: 10px;
+    }
 }
 
 
@@ -143,10 +147,6 @@ footer {
 }
 
 /* Styles for list view */
-.list-container table {
-    margin-top: 20px;
-}
-
 .list-container th.sortable {
     cursor: pointer;
 }
